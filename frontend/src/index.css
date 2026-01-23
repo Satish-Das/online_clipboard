@@ -1,0 +1,693 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    /* Prevent zoom on iOS when focusing inputs */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900;
+    /* Prevent pull-to-refresh */
+    overscroll-behavior-y: contain;
+    /* Improve touch scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Ensure minimum touch target size (44px) */
+  button, 
+  input[type="button"], 
+  input[type="submit"], 
+  input[type="reset"],
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Improve form controls on mobile */
+  input, 
+  textarea, 
+  select {
+    /* Prevent zoom on iOS */
+    font-size: 16px;
+    /* Better touch experience */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  /* Remove iOS input shadows */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl min-h-[44px];
+  }
+  
+  .btn-secondary {
+    @apply bg-white hover:bg-gray-50 text-gray-700 font-medium py-3 px-4 rounded-lg transition-all duration-200 border border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md min-h-[44px];
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white min-h-[44px];
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 hover:shadow-xl transition-all duration-300;
+  }
+
+  .gradient-bg {
+    @apply bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50;
+  }
+
+  .glass-effect {
+    @apply bg-white/70 backdrop-blur-sm border border-white/20;
+  }
+
+  /* Mobile-first responsive utilities */
+  .mobile-padding {
+    @apply px-3 sm:px-4 lg:px-6;
+  }
+
+  .mobile-text {
+    @apply text-sm sm:text-base;
+  }
+
+  .mobile-heading {
+    @apply text-lg sm:text-xl lg:text-2xl;
+  }
+
+  /* Touch-friendly interactive elements */
+  .touch-button {
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
+  }
+
+  /* Safe area handling for notched devices */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Enhanced scrollbar for all devices */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f8fafc;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f8fafc;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #cbd5e1, #94a3b8);
+  border-radius: 4px;
+  border: 1px solid #f8fafc;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #94a3b8, #64748b);
+}
+
+.custom-scrollbar::-webkit-scrollbar-corner {
+  background: #f8fafc;
+}
+
+/* Enhanced typing indicator animation */
+.typing-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.typing-indicator span {
+  height: 4px;
+  width: 4px;
+  background: linear-gradient(45deg, #3b82f6, #6366f1);
+  border-radius: 50%;
+  display: inline-block;
+  animation: typing 1.4s infinite ease-in-out;
+}
+
+@media (min-width: 640px) {
+  .typing-indicator span {
+    height: 6px;
+    width: 6px;
+  }
+}
+
+.typing-indicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0s;
+}
+
+@keyframes typing {
+  0%, 80%, 100% {
+    transform: scale(0.8) translateY(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.2) translateY(-2px);
+    opacity: 1;
+  }
+}
+
+/* Pulse animation for connection status */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0);
+  }
+}
+
+@media (min-width: 640px) {
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+    }
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Smooth fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 640px) {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Slide in from right animation */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (min-width: 640px) {
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.3s ease-out;
+}
+
+/* Bounce animation for buttons */
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1px);
+  }
+}
+
+@media (min-width: 640px) {
+  @keyframes bounce-subtle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.bounce-subtle:hover {
+  animation: bounce-subtle 0.3s ease-in-out;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@media (min-width: 640px) {
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Shimmer effect for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+@media (min-width: 640px) {
+  @keyframes shimmer {
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+@media (min-width: 640px) {
+  .shimmer {
+    background-size: 400% 100%;
+  }
+}
+
+/* Enhanced focus styles */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1), 0 0 0 1px rgba(59, 130, 246, 0.2);
+}
+
+@media (min-width: 640px) {
+  .focus-ring:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 0 0 1px rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Custom selection color */
+::selection {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: inherit;
+}
+
+/* Improved button hover effects */
+.btn-hover-lift:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 640px) {
+  .btn-hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Status indicator animations */
+.status-online {
+  background: linear-gradient(45deg, #10b981, #059669);
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-glow 2s infinite;
+}
+
+.status-offline {
+  background: linear-gradient(45deg, #ef4444, #dc2626);
+}
+
+/* Card hover effects */
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 640px) {
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  /* Larger touch targets on mobile */
+  .mobile-touch {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Better spacing on mobile */
+  .mobile-spacing {
+    padding: 0.75rem;
+  }
+
+  /* Prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Better mobile typography */
+  .mobile-text-adjust {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+/* Tablet-specific improvements */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .tablet-padding {
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* High DPI display improvements */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-border {
+    border-width: 0.5px;
+  }
+}
+
+/* Dark mode support (future enhancement) */
+@media (prefers-color-scheme: dark) {
+  .dark-mode {
+    @apply bg-gray-900 text-gray-100;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+  /* Button consistency across devices */
+  .btn-consistent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Ensure icons don't shrink */
+  .icon-fixed {
+    flex-shrink: 0;
+  }
+
+  /* Better button spacing */
+  .btn-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* Responsive button sizing */
+  @media (max-width: 640px) {
+    .btn-consistent {
+      min-height: 48px;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (min-width: 641px) {
+    .btn-consistent {
+      min-height: 44px;
+      padding: 0.5rem 1.5rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .btn-consistent {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+  }
+  /* Perfect button alignment utilities */
+  .btn-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    white-space: nowrap;
+    gap: 0.25rem;
+  }
+
+  /* Ensure all toolbar buttons have same height */
+  .toolbar-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .toolbar-container > * {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Timer alignment with buttons */
+  .timer-container {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Responsive toolbar adjustments */
+  @media (max-width: 640px) {
+    .btn-toolbar {
+      min-height: 44px;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+    }
+    
+    .toolbar-container > * {
+      min-height: 44px;
+    }
+    
+    .timer-container {
+      min-height: 44px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .btn-toolbar {
+      min-height: 40px;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+  }
+  /* Mobile-first button alignment */
+  @media (max-width: 480px) {
+    .btn-toolbar {
+      min-height: 48px;
+      padding: 0.75rem 0.5rem;
+      font-size: 0.75rem;
+      min-width: 60px;
+    }
+    
+    .toolbar-container {
+      gap: 0.25rem;
+    }
+    
+    .timer-container {
+      min-height: 48px;
+    }
+    
+    /* Stack toolbar items on very small screens */
+    .toolbar-container {
+      justify-content: center;
+    }
+  }
+
+  /* Tablet adjustments */
+  @media (min-width: 481px) and (max-width: 768px) {
+    .btn-toolbar {
+      min-height: 44px;
+      padding: 0.625rem 0.75rem;
+      font-size: 0.875rem;
+    }
+    
+    .timer-container {
+      min-height: 44px;
+    }
+  }
+
+  /* Desktop fine-tuning */
+  @media (min-width: 1280px) {
+    .btn-toolbar {
+      min-height: 40px;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+    
+    .toolbar-container {
+      gap: 0.75rem;
+    }
+  }
+
+  /* Ensure consistent icon sizing */
+  .btn-toolbar svg {
+    flex-shrink: 0;
+  }
+
+  /* Perfect vertical alignment for all elements */
+  .toolbar-row {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  @media (max-width: 640px) {
+    .toolbar-row {
+      min-height: 48px;
+    }
+  }
+  /* Mobile-specific textarea height optimization */
+  @media (max-width: 640px) {
+    .mobile-textarea-container {
+      min-height: 60vh !important;
+    }
+    
+    .mobile-textarea {
+      min-height: 60vh !important;
+      font-size: 16px !important; /* Prevent zoom on iOS */
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .tablet-textarea-container {
+      min-height: 55vh !important;
+    }
+    
+    .tablet-textarea {
+      min-height: 55vh !important;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .desktop-textarea-container {
+      min-height: 50vh !important;
+    }
+    
+    .desktop-textarea {
+      min-height: 50vh !important;
+    }
+  }
