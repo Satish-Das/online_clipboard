@@ -4,7 +4,7 @@ const connectDB = async () => {
   try {
     // Database connection string with specific database name
     // Format: mongodb+srv://username:password@cluster/DATABASE_NAME
-    const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://satish:satish123@cluster0.dhtn6.mongodb.net/online_clipboard';
+    const mongoUri = process.env.MONGODB_URI || 'MONGODB_URI/online_clipboard';
     
     const options = {
       // Remove deprecated options
